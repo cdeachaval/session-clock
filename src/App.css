@@ -1,10 +1,68 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  justify-content: center;
+  align-items: center;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+h2 {
+font-size: 4rem;
+font-weight: 400;
+}
+
+h4 {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.interval-setter {
+  display: flex;
+  margin: 0 20px;
+  align-items: center;
+}
+
+.interval-container {
+  display: flex;
+}
+
+button {
+  margin: 0 10px;
+  height: 25px;
+  background-color: lightgray;
+  cursor: pointer;
+  width: 70px;
+  border-radius: 20px;
+}
+
+.time-length {
+  font-size: 2rem;
+  margin: 0 10px;
+}
+
+.timer-container {
+  border: 2px solid black;
+  margin-top: 40px;
+  border-radius: 25px;
+  width: 200px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.50);
+  padding: 10px;
+}
+
+.timer {
+  font-size: 2rem;
+}
+
+.timer-actions {
+  margin-top: 20px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
