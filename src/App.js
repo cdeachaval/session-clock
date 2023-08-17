@@ -9,7 +9,7 @@ class App extends React.Component {
       sessionLength: 25,
       isSession: true,
       timerMinutes: 25,
-      timerSeconds: 0
+      timerSeconds: 0,
     }
     this.onIncreaseBreakLength = this.onIncreaseBreakLength.bind(this);
     this.onDecreaseBreakLength = this.onDecreaseBreakLength.bind(this);
@@ -156,9 +156,9 @@ function TimeWatch(props) {
         } </span>
       </section>
       <section className="timer-actions">
-        <button>Play</button>
+        <button>Play</button> 
         <button>Stop</button>
-        <button>Refresh</button>
+        <button>Reset</button>
       </section>
     </main>
   )
