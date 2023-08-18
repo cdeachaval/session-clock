@@ -43,6 +43,10 @@ button {
   border-radius: 20px;
 }
 
+button:disabled {
+  cursor: not-allowed;
+}
+
 .time-length {
   font-size: 2rem;
   margin: 0 10px;
@@ -52,7 +56,7 @@ button {
   border: 2px solid black;
   margin-top: 40px;
   border-radius: 25px;
-  width: 200px;
+  width: 250px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.50);
   padding: 10px;
 }

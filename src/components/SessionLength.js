@@ -15,11 +15,11 @@ function SessionLength(props) {
     }
     return (
       <main>
-        <h4>Session Length</h4>
+        <h4 id="session-label" >Session Length</h4>
         <div class="interval-setter">
-          <button onClick={decreaseSession}>Down</button>
-          <p class="time-length">{props.sessionLength}</p>
-          <button onClick={increaseSession}>Up</button>
+          <button disabled={props.isPlay ? "disabled" : ""} onClick={decreaseSession} id="session-decrement">Down</button>
+          <p class="time-length" id="session-length" >{props.sessionLength}</p>
+          <button disabled={props.isPlay ? "disabled" : ""} onClick={increaseSession} id="session-increment">Up</button>
         </div>
       </main>
     )

@@ -15,11 +15,11 @@ function BreakInterval(props) {
     }
     return (
       <div>
-        <h4>Break Length</h4>
+        <h4 id="break-label" >Break Length</h4>
         <div class="interval-setter">
-          <button onClick={decreaseCounter}>Down</button>
-          <p class="time-length">{props.breakInterval}</p>
-          <button onClick={increaseCounter}>Up</button>
+          <button disabled={props.isPlay ? "disabled" : ""} onClick={decreaseCounter} id="break-decrement" >Down</button>
+          <p class="time-length" id="break-length" >{props.breakInterval}</p>
+          <button disabled={props.isPlay ? "disabled" : ""} onClick={increaseCounter} id="break-increment">Up</button>
         </div>
       </div>
     )
