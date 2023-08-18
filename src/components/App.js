@@ -1,5 +1,8 @@
 import React from 'react'
-import './App.css';
+import '../App.css';
+import BreakInterval from './BreakInterval'
+import SessionLength from './SessionLength'
+import TimeWatch from './TimeWatch'
 
 class App extends React.Component {
   constructor() {
@@ -7,16 +10,17 @@ class App extends React.Component {
     this.state = { //what we need to keep track of
       breakLength: 5,
       sessionLength: 25,
-      isSession: true,
       timerMinutes: 25,
-      timerSeconds: 0,
+      isPlay: false,
     }
     this.onIncreaseBreakLength = this.onIncreaseBreakLength.bind(this);
     this.onDecreaseBreakLength = this.onDecreaseBreakLength.bind(this);
-    this.onDecreaseSessionLength = this.onDecreaseSessionLength.bind(this);
     this.onIncreaseSessionLength = this.onIncreaseSessionLength.bind(this);
+    this.onDecreaseSessionLength = this.onDecreaseSessionLength.bind(this);
     this.onUpdateTimerMinutes = this.onUpdateTimerMinutes.bind(this);
     this.onToggleInterval = this.onToggleInterval.bind(this);
+    this.onResetTimer = this.onResetTimer.bind(this);
+    this.onPlayStopTimer = this.onPlayStopTimer.bind(this);
   }
   onIncreaseBreakLength() {
     this.setState((prevState) => {
@@ -62,106 +66,50 @@ class App extends React.Component {
       })
     } else {
       this.setState({
-        counterMinutes: this.state.breakInterval
+        timerMinutes: this.state.breakInterval
       })
     }
   }
+  onResetTimer() {
+    this.setState({
+      timerMinutes: this.state.sessionLength
+    })
+  }
+
+  onPlayStopTimer(isPlay) {
+    this.setState({
+      isPlay: isPlay
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <h2>Session Timer</h2>
         <section className="interval-container">
           <BreakInterval 
+            isPlay={this.state.isPlay}
             breakInterval={this.state.breakLength}
             increaseBreak={this.onIncreaseBreakLength}
             decreaseBreak={this.onDecreaseBreakLength}
           />
-          <SessionLength sessionLength={this.state.sessionLength} 
+          <SessionLength 
+          isPlay={this.state.isPlay}
+          sessionLength={this.state.sessionLength} 
           increaseSession={this.onIncreaseSessionLength}
           decreaseSession={this.onDecreaseSessionLength}
           />
         </section>
         <TimeWatch timerMinutes={this.state.timerMinutes}
-          timerSeconds={this.state.timerSeconds}
-          isSession={this.state.isSession}
           breakLength={this.state.breakLength}
           updateTimerMinutes={this.onUpdateTimerMinutes}
-          onToggleInterval={this.onToggleInterval} />
+          toggleInterval={this.onToggleInterval} 
+          resetTimer={this.onResetTimer}
+          onPlayStopTimer={this.onPlayStopTimer}
+          />
       </div>
     );
   };
-}
-
-function BreakInterval(props) {
-  function decreaseCounter() {
-    if (props.breakInterval === 1) {
-      return;
-    }
-    props.decreaseBreak();
-  }
-  function increaseCounter() {
-    if (props.breakInterval === 60) {
-      return;
-    }
-    props.increaseBreak();
-  }
-  return (
-    <div>
-      <h4>Break Length</h4>
-      <div class="interval-setter">
-        <button onClick={decreaseCounter}>Down</button>
-        <p class="time-length">{props.breakInterval}</p>
-        <button onClick={increaseCounter}>Up</button>
-      </div>
-    </div>
-  )
-}
-
-function SessionLength(props) {
-  function decreaseSession() {
-    if (props.sessionLength === 1) {
-      return;
-    }
-    props.decreaseSession();
-  }
-  function increaseSession() {
-    if (props.sessionLength === 60) {
-      return;
-    }
-    props.increaseSession();
-  }
-  return (
-    <main>
-      <h4>Session Length</h4>
-      <div class="interval-setter">
-        <button onClick={decreaseSession}>Down</button>
-        <p class="time-length">{props.sessionLength}</p>
-        <button onClick={increaseSession}>Up</button>
-      </div>
-    </main>
-  )
-}
-
-function TimeWatch(props) {
-
-  return (
-    <main>
-      <section className="timer-container">
-        <h4>{props.isSession === true ? "Session" : "Break"}</h4>
-        <span className="timer">{props.timerMinutes}</span>
-        <span className="timer">:</span>
-        <span className="timer">{props.timerSeconds === 0 ? "00" :
-          props.timerSeconds < 10 ? "0" + props.timerSeconds :
-            props.timerSeconds
-        } </span>
-      </section>
-      <section className="timer-actions">
-        <button>Play</button> 
-        <button>Stop</button>
-        <button>Reset</button>
-      </section>
-    </main>
-  )
 }
 
 export default App;
